@@ -24,18 +24,18 @@ async function getOne(req: IReq, res: IRes) {
 /**
  * Add one user.
  */
-async function add(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await ProductoService.addOne(user);
+async function add(req: IReq<{producto: IProducto}>, res: IRes) {
+  const { producto } = req.body;
+  await ProductoService.addOne(producto);
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
 /**
  * Update one user.
  */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await ProductoService.updateOne(user);
+async function update(req: IReq<{producto: IProducto}>, res: IRes) {
+  const { producto } = req.body;
+  await ProductoService.updateOne(producto);
   return res.status(HttpStatusCodes.OK).end();
 }
 

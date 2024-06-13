@@ -4,7 +4,7 @@ import Paths from '@src/common/Paths';
 import CompraRoutes from '@src/routes/CompraRoutes';
 import ProductoRoutes from '@src/routes/ProductoRoutes';
 import UserRoutes from './UserRoutes';
-import Producto_has_CompraRoutes  from './Producto_has_CompraRoutes';
+import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 
 
 // **** Variables **** //
@@ -15,62 +15,109 @@ const apiRouter = Router(),
 
 // ** Add UserRouter ** //
 
-const empleadoRouter = Router();
-const sectorRouter = Router();
+const userRouter = Router();
+const productoRouter = Router();
+const compraRouter = Router();
+const producto_has_compraRouter = Router();
 
 // Get all users
-empleadoRouter.get(
-  Paths.Empleados.Get,
-  EmpleadoRoutes.getAll,
+userRouter.get(
+  Paths.Users.Get,
+  UserRoutes.getAll,
 );
 
 // Add one user
-empleadoRouter.post(
-  Paths.Empleados.Add,
-  EmpleadoRoutes.add,
+userRouter.post(
+  Paths.Users.Add,
+  UserRoutes.add,
 );
 
 // Update one user
-empleadoRouter.put(
-  Paths.Empleados.Update,
-  EmpleadoRoutes.update,
+userRouter.put(
+  Paths.Users.Update,
+  UserRoutes.update,
 );
 
 // Delete one user
-empleadoRouter.delete(
-  Paths.Empleados.Delete,
+userRouter.delete(
+  Paths.Users.Delete,
   validate(['id', 'number', 'params']),
-  EmpleadoRoutes.delete,
+  UserRoutes.delete,
 );
 
 // Get all users
-sectorRouter.get(
-  Paths.Sectores.Get,
-  SectorRoutes.getAll,
+compraRouter.get(
+  Paths.Compras.Get,
+  CompraRoutes.getAll,
 );
 
 // Add one user
-sectorRouter.post(
-  Paths.Sectores.Add,
-  SectorRoutes.add,
+compraRouter.post(
+  Paths.Compras.Add,
+  CompraRoutes.add,
 );
 
 // Update one user
-sectorRouter.put(
-  Paths.Sectores.Update,
-  SectorRoutes.update,
+compraRouter.put(
+  Paths.Compras.Update,
+  CompraRoutes.update,
 );
 
 // Delete one user
-sectorRouter.delete(
-  Paths.Sectores.Delete,
+compraRouter.delete(
+  Paths.Compras.Delete,
   validate(['id', 'number', 'params']),
-  SectorRoutes.delete,
+  CompraRoutes.delete,
 );
+
+productoRouter.get(
+  Paths.Productos.Get,
+  ProductoRoutes.getAll,
+);
+
+productoRouter.post(
+  Paths.Productos.Add,
+  ProductoRoutes.add,
+);
+
+productoRouter.put(
+  Paths.Productos.Update,
+  ProductoRoutes.update,
+);
+
+productoRouter.delete(
+  Paths.Productos.Delete,
+  validate(['id', 'number', 'params']),
+  ProductoRoutes.delete,
+);
+
+producto_has_compraRouter.get(
+  Paths.Producto_has_Compra.Get,
+  Producto_has_ComprasRoutes.getAll,
+);
+
+producto_has_compraRouter.post(
+  Paths.Producto_has_Compra.Add,
+  Producto_has_ComprasRoutes.add,
+);
+
+producto_has_compraRouter.put(
+  Paths.Producto_has_Compra.Update,
+  Producto_has_ComprasRoutes.update,
+);
+
+producto_has_compraRouter.delete(
+  Paths.Producto_has_Compra.Delete,
+  validate(['id', 'number', 'params']),
+  Producto_has_ComprasRoutes.delete,
+);
+
+
 
 // Add Routers
-apiRouter.use(Paths.Empleados.Base, empleadoRouter);
-apiRouter.use(Paths.Sectores.Base, sectorRouter);
+apiRouter.use(Paths.Users.Base, userRouter);
+apiRouter.use(Paths.Compras.Base, compraRouter);
+apiRouter.use(Paths.Productos.Base, productoRouter);
 
 
 // **** Export default **** //

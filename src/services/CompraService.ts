@@ -1,13 +1,13 @@
 import RouteError from '@src/common/RouteError';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
-import UserRepo from '@src/repos/UserRepo';
-import { IUser } from '@src/models/User';
+import CompraRepo from '@src/repos/CompraRepo';
+import { ICompra } from '@src/models/Compra';
 
 
 // **** Variables **** //
 
-export const USER_NOT_FOUND_ERR = 'User not found';
+export const COMPRA_NOT_FOUND_ERR = 'Compra not found';
 
 
 // **** Functions **** //
@@ -15,54 +15,54 @@ export const USER_NOT_FOUND_ERR = 'User not found';
 /**
  * Get all users.
  */
-function getAll(): Promise<IUser[]> {
-  return UserRepo.getAll();
+function getAll(): Promise<ICompra[]> {
+  return CompraRepo.getAll();
 }
 
-async function getOne(id :number): Promise<IUser | null> {
-  const persists = await UserRepo.persists(id);
+async function getOne(id :number): Promise<ICompra | null> {
+  const persists = await CompraRepo.persists(id);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
+      COMPRA_NOT_FOUND_ERR,
     );
   }
 }
 /**
  * Add one user.
  */
-function addOne(user: IUser): Promise<void> {
-  return UserRepo.add(user);
+function addOne(compra: ICompra): Promise<void> {
+  return CompraRepo.add(compra);
 }
 
 /**
  * Update one user.
  */
-async function updateOne(user: IUser): Promise<void> {
-  const persists = await UserRepo.persists(user.idUsuario);
+async function updateOne(compra: ICompra): Promise<void> {
+  const persists = await CompraRepo.persists(compra.idCompra);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
+      COMPRA_NOT_FOUND_ERR,
     );
   }
   // Return user
-  return UserRepo.update(user);
+  return CompraRepo.update(compra);
 }
 
 /**
  * Delete a user by their id.
  */
 async function _delete(id: number): Promise<void> {
-  const persists = await UserRepo.persists(id);
+  const persists = await CompraRepo.persists(id);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
+      COMPRA_NOT_FOUND_ERR,
     );
   }
   // Delete user
-  return UserRepo.delete(id);
+  return CompraRepo.delete(id);
 }
 
 

@@ -11,31 +11,31 @@ import { IReq, IRes } from './types/express/misc';
  * Get all users.
  */
 async function getAll(_: IReq, res: IRes) {
-    const users = await CompraService.getAll();
-    return res.status(HttpStatusCodes.OK).json({ users });
+    const compra = await CompraService.getAll();
+    return res.status(HttpStatusCodes.OK).json({ compra });
 }
 
 async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
-  const alumnos = await CompraService.getOne(id);
-  return res.status(HttpStatusCodes.OK).json({ alumnos });
+  const compra = await CompraService.getOne(id);
+  return res.status(HttpStatusCodes.OK).json({ compra });
 }
 
 /**
  * Add one user.
  */
-async function add(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await CompraService.addOne(user);
+async function add(req: IReq<{compra: ICompra}>, res: IRes) {
+  const { compra } = req.body;
+  await CompraService.addOne(compra);
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
 /**
  * Update one user.
  */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await CompraService.updateOne(user);
+async function update(req: IReq<{compra: ICompra}>, res: IRes) {
+  const { compra } = req.body;
+  await CompraService.updateOne(compra);
   return res.status(HttpStatusCodes.OK).end();
 }
 

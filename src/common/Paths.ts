@@ -4,12 +4,37 @@
 
 
 export default {
-  Base: '/api',
+  Base: '/',
   Users: {
-    Base: '/users',
-    Get: '/all',
-    Add: '/add',
-    Update: '/update',
-    Delete: '/delete/:id',
+    Base: '/usuario',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
   },
+  Productos: {
+    Base: '/producto',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Compras: {
+    Base: '/compra',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Producto_has_Compra: {
+    Base: '/prodHasComp',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  }
 } as const;

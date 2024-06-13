@@ -20,6 +20,11 @@ import RouteError from '@src/common/RouteError';
 import { NodeEnvs } from '@src/common/misc';
 
 
+
+import { defineAssociations } from '@src/models/sequalize';
+import { connect } from './database';
+
+
 // **** Variables **** //
 
 const app = express();
@@ -84,7 +89,8 @@ app.get('/users', (_: Request, res: Response) => {
   return res.sendFile('users.html', { root: viewsDir });
 });
 
-
+connect();
+defineAssociations();
 // **** Export default **** //
 
 export default app;

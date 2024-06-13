@@ -19,6 +19,15 @@ function getAll(): Promise<IUser[]> {
   return UserRepo.getAll();
 }
 
+async function getOne(id :number): Promise<IUser | null> {
+  const persists = await Repo.persists(id);
+  if (!persists) {
+    throw new RouteError(
+      HttpStatusCodes.NOT_FOUND,
+      USER_NOT_FOUND_ERR,
+    );
+  }
+}
 /**
  * Add one user.
  */
@@ -60,6 +69,7 @@ async function _delete(id: number): Promise<void> {
 // **** Export default **** //
 
 export default {
+  getOne,
   getAll,
   addOne,
   updateOne,

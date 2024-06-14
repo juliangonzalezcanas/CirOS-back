@@ -70,7 +70,7 @@ async function update(producto_has_compra: IProducto_has_Compra): Promise<void> 
 
     await Producto_has_Compra.update(producto_has_compra, {
       where: {
-        [Op.and]: [{a: producto_has_compra.Compra_idCompra}, {b: producto_has_compra.Producto_idProducto}]
+        Compra_idCompra: producto_has_compra.Compra_idCompra
       }
     });
 

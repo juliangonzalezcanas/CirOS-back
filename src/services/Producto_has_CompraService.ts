@@ -19,13 +19,7 @@ function getAll(): Promise<IProducto_has_Compra[]> {
 }
 
 async function getOne(id :number): Promise<IProducto_has_Compra | null> {
-  const persists = await Producto_has_CompraRepo.persists(id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      PRODUCTOHASCOMPRA_NOT_FOUND_ERR,
-    );
-  }
+  return Producto_has_CompraRepo.getOne(id);
 }
 
 

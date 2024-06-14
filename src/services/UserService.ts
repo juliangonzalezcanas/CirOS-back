@@ -20,13 +20,7 @@ function getAll(): Promise<IUser[]> {
 }
 
 async function getOne(id :number): Promise<IUser | null> {
-  const persists = await UserRepo.persists(id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
-    );
-  }
+  return UserRepo.getOne(id);
 }
 /**
  * Add one user.

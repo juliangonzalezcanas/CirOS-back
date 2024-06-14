@@ -8,11 +8,11 @@ import { IReq, IRes } from './types/express/misc';
 // **** Functions **** //
 
 /**
- * Get all users.
+ * Get all producto_has_compras.
  */
 async function getAll(_: IReq, res: IRes) {
-    const users = await Producto_has_CompraService.getAll();
-    return res.status(HttpStatusCodes.OK).json({ users });
+    const producto_has_compras = await Producto_has_CompraService.getAll();
+    return res.status(HttpStatusCodes.OK).json({ producto_has_compras });
 }
 
 async function getOne(req: IReq, res: IRes) {
@@ -22,25 +22,25 @@ async function getOne(req: IReq, res: IRes) {
 }
 
 /**
- * Add one user.
+ * Add one producto_has_compra.
  */
-async function add(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await Producto_has_CompraService.addOne(user);
+async function add(req: IReq<{producto_has_compra: IProducto_has_Compra}>, res: IRes) {
+  const { producto_has_compra } = req.body;
+  await Producto_has_CompraService.addOne(producto_has_compra);
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
 /**
- * Update one user.
+ * Update one producto_has_compra.
  */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await Producto_has_CompraService.updateOne(user);
+async function update(req: IReq<{producto_has_compra: IProducto_has_Compra}>, res: IRes) {
+  const { producto_has_compra } = req.body;
+  await Producto_has_CompraService.updateOne(producto_has_compra);
   return res.status(HttpStatusCodes.OK).end();
 }
 
 /**
- * Delete one user.
+ * Delete one producto_has_compra.
  */
 async function delete_(req: IReq, res: IRes) {
   const id = +req.params.id;

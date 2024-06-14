@@ -20,13 +20,7 @@ function getAll(): Promise<ICompra[]> {
 }
 
 async function getOne(id :number): Promise<ICompra | null> {
-  const persists = await CompraRepo.persists(id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      COMPRA_NOT_FOUND_ERR,
-    );
-  }
+  return CompraRepo.getOne(id);
 }
 /**
  * Add one user.

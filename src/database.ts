@@ -1,7 +1,7 @@
 
 const { Sequelize } = require('sequelize');
 
-export const sequelize = new Sequelize('cirOS', 'alumno', 'alumnoipm', {
+export const sequelize = new Sequelize('ciros', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
 });

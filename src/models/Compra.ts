@@ -1,17 +1,8 @@
-import moment from 'moment';
 import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
-import { table } from 'console';
 import { Usuario } from './User';
 
 
-// **** Variables **** //
-
-const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
-  'with the appropriate user keys.';
-
-
-// **** Types **** //
 
 export interface ICompra {
   idCompra: number;

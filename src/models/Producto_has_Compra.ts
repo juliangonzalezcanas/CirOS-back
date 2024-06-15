@@ -1,16 +1,8 @@
-import moment from 'moment';
 import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
-import { table } from 'console';
 
-
-// **** Variables **** //
-
-const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
-  'with the appropriate user keys.';
-
-
-// **** Types **** //
+import { Producto } from './Producto';
+import { Compra } from './Compra';
 
 export interface IProducto_has_Compra {
   Producto_idProducto: number;
@@ -22,14 +14,14 @@ export const Producto_has_Compra = sequelize.define('Producto_has_Compra', {
     Producto_idProducto: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Producto',
+            model: Producto,
             key: 'idProducto'
         }
     },
     Compra_idCompra: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Compra',
+            model: Compra,
             key: 'idCompra'
         }
     },

@@ -6,7 +6,7 @@ import { Usuario } from "./User";
 export function defineAssociations() {
 
     Usuario.hasMany(Compra, {foreignKey: 'Usuario_idUsuario'});
-    Compra.belongsTo(Usuario);
+
 
     Producto.belongsToMany(Compra, {through: Producto_has_Compra, foreignKey: 'Producto_idProducto'});
     Compra.belongsToMany(Producto, {through: Producto_has_Compra, foreignKey: 'Compra_idCompra'});

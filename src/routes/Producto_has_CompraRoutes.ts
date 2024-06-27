@@ -30,14 +30,7 @@ async function add(req: IReq<IProducto_has_Compra>, res: IRes) {
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
-/**
- * Update one producto_has_compra.
- */
-async function update(req: IReq<IProducto_has_Compra>, res: IRes) {
-  const producto_has_compra = req.body;
-  await Producto_has_CompraService.updateOne(producto_has_compra);
-  return res.status(HttpStatusCodes.OK).end();
-}
+
 
 /**
  * Delete one producto_has_compra.
@@ -55,6 +48,5 @@ export default {
   getAll,
   getOne,
   add,
-  update,
   delete: delete_,
 } as const;

@@ -66,20 +66,6 @@ async function add(producto_has_compra: IProducto_has_Compra): Promise<void> {
   }
 }
 
-async function update(producto_has_compra: IProducto_has_Compra): Promise<void> {
-  try {
-
-    await Producto_has_Compra.update(producto_has_compra, {
-      where: {
-        Compra_idCompra: producto_has_compra.Compra_idCompra
-      }
-    });
-
-  } catch (error) {
-    console.error("Error updating producto_has_compra:", error);
-
-  }
-}
 
 
 async function delete_(id: number): Promise<void> {
@@ -87,7 +73,7 @@ async function delete_(id: number): Promise<void> {
     
     await Producto_has_Compra.destroy({
       where: {
-        idProducto_has_Compra: id
+        Compra_idCompra: id
       }
     });
 
@@ -105,6 +91,5 @@ export default {
   persists,
   getAll,
   add,
-  update,
   delete: delete_,
 } as const;

@@ -8,6 +8,7 @@ export interface IProducto_has_Compra {
   Producto_idProducto: number;
   Compra_idCompra: number;
   cantidad: number;
+  precio: number;
 }
 
 export const Producto_has_Compra = sequelize.define('Producto_has_Compra', {
@@ -28,6 +29,11 @@ export const Producto_has_Compra = sequelize.define('Producto_has_Compra', {
     cantidad: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    precio: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    
     }
 }, {
   timestamps: false,

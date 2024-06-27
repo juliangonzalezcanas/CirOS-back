@@ -34,7 +34,6 @@ export default {
     Get: '/',
     GetOne: '/:id',
     Add: '/',
-    Update: '/:id',
     Delete: '/:id',
   }
 } as const;

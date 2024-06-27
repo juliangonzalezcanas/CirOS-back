@@ -7,7 +7,6 @@ import { Usuario } from './User';
 export interface ICompra {
   idCompra: number;
   fecha: Date;
-  total: number;
   Usuario_idUsuario: number;
 }
 
@@ -20,10 +19,6 @@ export const Compra = sequelize.define('Compra', {
     },
     fecha: {
         type: DataTypes.DATE,
-        allowNull: false
-    },
-    total: {
-        type: DataTypes.FLOAT,
         allowNull: false
     },
     Usuario_idUsuario: {

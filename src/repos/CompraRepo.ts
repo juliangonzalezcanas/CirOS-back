@@ -55,7 +55,6 @@ async function add(compra: ICompra): Promise<void> {
     await Compra.create({
       idCompra: compra.idCompra,
       fecha: compra.fecha,
-      total: compra.total,
       Usuario_idUsuario: compra.Usuario_idUsuario
     });
 

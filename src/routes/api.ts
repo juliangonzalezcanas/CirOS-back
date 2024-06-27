@@ -118,10 +118,6 @@ producto_has_compraRouter.post(
   Producto_has_ComprasRoutes.add,
 );
 
-producto_has_compraRouter.put(
-  Paths.Producto_has_Compra.Update,
-  Producto_has_ComprasRoutes.update,
-);
 
 producto_has_compraRouter.delete(
   Paths.Producto_has_Compra.Delete,

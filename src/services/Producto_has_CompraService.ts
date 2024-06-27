@@ -28,18 +28,6 @@ function addOne(prodCompra: IProducto_has_Compra): Promise<void> {
 }
 
 
-async function updateOne(Producto_has_Compra: IProducto_has_Compra): Promise<void> {
-  const persists = await Producto_has_CompraRepo.persists(Producto_has_Compra.Compra_idCompra);
-  const persists2 = await Producto_has_CompraRepo.persists(Producto_has_Compra.Producto_idProducto);
-  if (!persists || !persists2) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      PRODUCTOHASCOMPRA_NOT_FOUND_ERR,
-    );
-  }
-  
-  return Producto_has_CompraRepo.update(Producto_has_Compra);
-}
 
 
 async function _delete(id: number): Promise<void> {
@@ -61,6 +49,5 @@ export default {
   getOne,
   getAll,
   addOne,
-  updateOne,
   delete: _delete,
 } as const;

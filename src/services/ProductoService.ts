@@ -41,7 +41,7 @@ async function updateOne(producto: IProducto): Promise<void> {
     );
   }
   // Return user
-  return ProductoRepo.update(Producto);
+  return ProductoRepo.update(producto);
 }
 
 /**

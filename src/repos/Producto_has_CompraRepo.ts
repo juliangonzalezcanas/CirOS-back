@@ -8,16 +8,17 @@ import Op from 'sequelize/types/operators';
  */
 
 async function getOne(id: number): Promise<IProducto_has_Compra | null> {
+  console.log(id);
   try {
 
-    const producto_has_compra = await Producto_has_Compra.findOne({
+    const producto_has_compras = await Producto_has_Compra.findAll({
       where: {
-        idProducto_has_Compra: id
+        Compra_idCompra: id
       }
     });
 
+    return producto_has_compras.map((producto_has_compra: { toJSON: () => IProducto_has_Compra; }) => producto_has_compra.toJSON() as IProducto_has_Compra);
 
-    return producto_has_compra ? producto_has_compra.toJSON() as IProducto_has_Compra : null;
 
   } catch (error) {
     console.error("Error retrieving producto_has_compra:", error);

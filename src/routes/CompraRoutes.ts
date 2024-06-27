@@ -18,14 +18,14 @@ async function getAll(_: IReq, res: IRes) {
 async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
   const compra = await CompraService.getOne(id);
-  return res.status(HttpStatusCodes.OK).json({ compra });
+  return res.status(HttpStatusCodes.OK).json( compra );
 }
 
 /**
  * Add one user.
  */
-async function add(req: IReq<{compra: ICompra}>, res: IRes) {
-  const { compra } = req.body;
+async function add(req: IReq<ICompra>, res: IRes) {
+  const compra = req.body;
   await CompraService.addOne(compra);
   return res.status(HttpStatusCodes.CREATED).end();
 }
@@ -33,8 +33,8 @@ async function add(req: IReq<{compra: ICompra}>, res: IRes) {
 /**
  * Update one user.
  */
-async function update(req: IReq<{compra: ICompra}>, res: IRes) {
-  const { compra } = req.body;
+async function update(req: IReq<ICompra>, res: IRes) {
+  const compra = req.body;
   await CompraService.updateOne(compra);
   return res.status(HttpStatusCodes.OK).end();
 }

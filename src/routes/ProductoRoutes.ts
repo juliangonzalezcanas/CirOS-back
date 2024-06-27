@@ -11,21 +11,21 @@ import { IReq, IRes } from './types/express/misc';
  * Get all users.
  */
 async function getAll(_: IReq, res: IRes) {
-    const users = await ProductoService.getAll();
-    return res.status(HttpStatusCodes.OK).json({ users });
+    const productos = await ProductoService.getAll();
+    return res.status(HttpStatusCodes.OK).json({ productos });
 }
 
 async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
-  const alumnos = await ProductoService.getOne(id);
-  return res.status(HttpStatusCodes.OK).json({ alumnos });
+  const producto = await ProductoService.getOne(id);
+  return res.status(HttpStatusCodes.OK).json( producto );
 }
 
 /**
  * Add one user.
  */
-async function add(req: IReq<{producto: IProducto}>, res: IRes) {
-  const { producto } = req.body;
+async function add(req: IReq<IProducto>, res: IRes) {
+  const  producto  = req.body;
   await ProductoService.addOne(producto);
   return res.status(HttpStatusCodes.CREATED).end();
 }
@@ -33,8 +33,8 @@ async function add(req: IReq<{producto: IProducto}>, res: IRes) {
 /**
  * Update one user.
  */
-async function update(req: IReq<{producto: IProducto}>, res: IRes) {
-  const { producto } = req.body;
+async function update(req: IReq<IProducto>, res: IRes) {
+  const producto = req.body;
   await ProductoService.updateOne(producto);
   return res.status(HttpStatusCodes.OK).end();
 }

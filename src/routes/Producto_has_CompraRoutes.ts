@@ -17,15 +17,15 @@ async function getAll(_: IReq, res: IRes) {
 
 async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
-  const alumnos = await Producto_has_CompraService.getOne(id);
-  return res.status(HttpStatusCodes.OK).json({ alumnos });
+  const producto_has_compra = await Producto_has_CompraService.getOne(id);
+  return res.status(HttpStatusCodes.OK).json(producto_has_compra);
 }
 
 /**
  * Add one producto_has_compra.
  */
-async function add(req: IReq<{producto_has_compra: IProducto_has_Compra}>, res: IRes) {
-  const { producto_has_compra } = req.body;
+async function add(req: IReq<IProducto_has_Compra>, res: IRes) {
+  const  producto_has_compra  = req.body;
   await Producto_has_CompraService.addOne(producto_has_compra);
   return res.status(HttpStatusCodes.CREATED).end();
 }
@@ -33,8 +33,8 @@ async function add(req: IReq<{producto_has_compra: IProducto_has_Compra}>, res: 
 /**
  * Update one producto_has_compra.
  */
-async function update(req: IReq<{producto_has_compra: IProducto_has_Compra}>, res: IRes) {
-  const { producto_has_compra } = req.body;
+async function update(req: IReq<IProducto_has_Compra>, res: IRes) {
+  const producto_has_compra = req.body;
   await Producto_has_CompraService.updateOne(producto_has_compra);
   return res.status(HttpStatusCodes.OK).end();
 }

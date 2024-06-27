@@ -17,15 +17,15 @@ async function getAll(_: IReq, res: IRes) {
 
 async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
-  const alumnos = await UserService.getOne(id);
-  return res.status(HttpStatusCodes.OK).json({ alumnos });
+  const user = await UserService.getOne(id);
+  return res.status(HttpStatusCodes.OK).json( user );
 }
 
 /**
  * Add one user.
  */
-async function add(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
+async function add(req: IReq<IUser>, res: IRes) {
+  const  user  = req.body;
   await UserService.addOne(user);
   return res.status(HttpStatusCodes.CREATED).end();
 }
@@ -33,8 +33,8 @@ async function add(req: IReq<{user: IUser}>, res: IRes) {
 /**
  * Update one user.
  */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
+async function update(req: IReq<IUser>, res: IRes) {
+  const  user  = req.body;
   await UserService.updateOne(user);
   return res.status(HttpStatusCodes.OK).end();
 }

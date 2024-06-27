@@ -49,6 +49,7 @@ async function getAll(): Promise<IUser[]> {
 }
 
 async function add(usuario: IUser): Promise<void> {
+  console.log(usuario.idUsuario);
   try {
     await Usuario.create({
       idUsuario: usuario.idUsuario,

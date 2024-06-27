@@ -26,6 +26,11 @@ userRouter.get(
   UserRoutes.getAll,
 );
 
+userRouter.get(
+  Paths.Users.GetOne,
+  UserRoutes.getOne,
+);
+
 // Add one user
 userRouter.post(
   Paths.Users.Add,
@@ -41,7 +46,6 @@ userRouter.put(
 // Delete one user
 userRouter.delete(
   Paths.Users.Delete,
-  validate(['id', 'number', 'params']),
   UserRoutes.delete,
 );
 
@@ -49,6 +53,11 @@ userRouter.delete(
 compraRouter.get(
   Paths.Compras.Get,
   CompraRoutes.getAll,
+);
+
+compraRouter.get(
+  Paths.Compras.GetOne,
+  CompraRoutes.getOne,
 );
 
 // Add one user
@@ -66,13 +75,17 @@ compraRouter.put(
 // Delete one user
 compraRouter.delete(
   Paths.Compras.Delete,
-  validate(['id', 'number', 'params']),
   CompraRoutes.delete,
 );
 
 productoRouter.get(
   Paths.Productos.Get,
   ProductoRoutes.getAll,
+);
+
+productoRouter.get(
+  Paths.Productos.GetOne,
+  ProductoRoutes.getOne,
 );
 
 productoRouter.post(
@@ -87,13 +100,17 @@ productoRouter.put(
 
 productoRouter.delete(
   Paths.Productos.Delete,
-  validate(['id', 'number', 'params']),
   ProductoRoutes.delete,
 );
 
 producto_has_compraRouter.get(
   Paths.Producto_has_Compra.Get,
   Producto_has_ComprasRoutes.getAll,
+);
+
+producto_has_compraRouter.get(
+  Paths.Producto_has_Compra.GetOne,
+  Producto_has_ComprasRoutes.getOne,
 );
 
 producto_has_compraRouter.post(
@@ -108,7 +125,6 @@ producto_has_compraRouter.put(
 
 producto_has_compraRouter.delete(
   Paths.Producto_has_Compra.Delete,
-  validate(['id', 'number', 'params']),
   Producto_has_ComprasRoutes.delete,
 );
 
@@ -118,6 +134,7 @@ producto_has_compraRouter.delete(
 apiRouter.use(Paths.Users.Base, userRouter);
 apiRouter.use(Paths.Compras.Base, compraRouter);
 apiRouter.use(Paths.Productos.Base, productoRouter);
+apiRouter.use(Paths.Producto_has_Compra.Base, producto_has_compraRouter);
 
 
 // **** Export default **** //

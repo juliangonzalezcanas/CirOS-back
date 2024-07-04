@@ -1,4 +1,6 @@
 import { IUser, Usuario } from '@src/models/User';
+import { generateToken } from '@src/util/jwt';
+import bcrypt from 'bcrypt';
 
 // **** Functions **** //
 
@@ -48,19 +50,27 @@ async function getAll(): Promise<IUser[]> {
   }
 }
 
-async function add(usuario: IUser): Promise<void> {
+async function add(usuario: IUser): Promise<string | void> {
   console.log(usuario.idUsuario);
+  const contra = await bcrypt.hash(usuario.contraseña, 10);
+  console.log(contra);
   try {
     await Usuario.create({
       idUsuario: usuario.idUsuario,
       nombre: usuario.nombre,
+      apellido: usuario.apellido,
       email: usuario.email,
-      contraseña: usuario.contraseña
+      contraseña: contra
     });
+    try{
+      return generateToken(usuario.idUsuario);
+    }
+    catch (error) {
+      return error;
+    }
 
   } catch (error) {
     console.error("Error adding usuario:", error);
-
   }
 }
 

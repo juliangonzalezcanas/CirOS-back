@@ -13,6 +13,11 @@ export default {
     Update: '/:id',
     Delete: '/:id',
   },
+  Auth: {
+    Base: '/auth',
+    Login: '/login',
+    Logout: '/logout',
+  },
   Productos: {
     Base: '/producto',
     Get: '/',

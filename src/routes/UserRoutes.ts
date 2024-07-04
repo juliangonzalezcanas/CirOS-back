@@ -26,8 +26,12 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function add(req: IReq<IUser>, res: IRes) {
   const  user  = req.body;
-  await UserService.addOne(user);
-  return res.status(HttpStatusCodes.CREATED).end();
+  try {
+    const token = UserService.addOne(user);
+    return res.status(HttpStatusCodes.CREATED).send(token);
+  } catch (error) {
+    return res.status(HttpStatusCodes.BAD_REQUEST).end();
+  }
 }
 
 /**

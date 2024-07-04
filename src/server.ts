@@ -24,6 +24,8 @@ import { NodeEnvs } from '@src/common/misc';
 import { defineAssociations } from '@src/models/sequalize';
 import { connect } from './database';
 
+import cors from "cors";
+
 
 // **** Variables **** //
 
@@ -36,6 +38,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser(EnvVars.CookieProps.Secret));
+app.use(cors());
 
 // Show routes called in console during development
 if (EnvVars.NodeEnv === NodeEnvs.Dev.valueOf()) {

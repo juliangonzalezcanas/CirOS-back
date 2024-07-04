@@ -15,6 +15,7 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 export interface IUser {
   idUsuario: number;
   nombre: string;
+  apellido: string;
   email: string;
   contraseña: string;
 }
@@ -27,6 +28,10 @@ export const Usuario = sequelize.define('Usuario', {
     autoIncrement: true
   },
   nombre: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  apellido: {
     type: DataTypes.STRING,
     allowNull: false
   },

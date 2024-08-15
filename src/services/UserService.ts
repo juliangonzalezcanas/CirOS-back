@@ -27,6 +27,7 @@ async function getOne(id :number): Promise<IUser | null> {
  */
 function addOne(user: IUser): Promise<string | void> {
   try{
+    console.log(user);
     return UserRepo.add(user);
   } catch(err){
     return err;

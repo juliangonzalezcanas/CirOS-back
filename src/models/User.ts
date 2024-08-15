@@ -17,7 +17,8 @@ export interface IUser {
   nombre: string;
   apellido: string;
   email: string;
-  contraseña: string;
+  direccion: string;
+  contrasenia: string;
 }
 
 export const Usuario = sequelize.define('Usuario', {
@@ -39,7 +40,11 @@ export const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  contraseña: {
+  contrasenia: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  direccion: {
     type: DataTypes.STRING,
     allowNull: false
   }

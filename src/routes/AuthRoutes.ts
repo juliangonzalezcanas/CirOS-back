@@ -2,10 +2,10 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import { IReq, IRes } from './types/express/misc';
 import AuthService from '@src/services/AuthService';
 
-async function login(IReq : IReq<{email: string, password:string}>, IRes : IRes) {
-    const { email, password } = IReq.body;
+async function login(IReq : IReq<{email: string, contrasenia:string}>, IRes : IRes) {
+    const { email, contrasenia } = IReq.body;
     try {
-        const token = await AuthService.login(email, password);
+        const token = await AuthService.login(email, contrasenia);
         return IRes.status(HttpStatusCodes.OK).send( token );
     }
     catch (error) {

@@ -3,14 +3,13 @@ import bcrypt from 'bcrypt';
 import {generateToken} from '../util/jwt';
 
 async function login(email: string, password: string): Promise<string>{
-
     const user = await Usuario.findOne({ 
         where: { email: email }
     });
-    const equals = await bcrypt.compare(password, user.contraseña);
+    const equals = await bcrypt.compare(password, user.contrasenia);
 
 
-    if (user && equals) {
+    if (equals) {
         return generateToken(user.idUsuario);
     } else {
         throw new Error('Invalid credentials');

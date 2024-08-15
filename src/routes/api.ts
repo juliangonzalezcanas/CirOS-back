@@ -5,6 +5,7 @@ import CompraRoutes from '@src/routes/CompraRoutes';
 import ProductoRoutes from '@src/routes/ProductoRoutes';
 import UserRoutes from './UserRoutes';
 import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
+import AuthRoutes from './AuthRoutes';
 
 
 // **** Variables **** //
@@ -19,6 +20,7 @@ const userRouter = Router();
 const productoRouter = Router();
 const compraRouter = Router();
 const producto_has_compraRouter = Router();
+const authRouter = Router();
 
 // Get all users
 userRouter.get(
@@ -124,6 +126,10 @@ producto_has_compraRouter.delete(
   Producto_has_ComprasRoutes.delete,
 );
 
+authRouter.post(
+  Paths.Auth.Login,
+  AuthRoutes.login,
+);
 
 
 // Add Routers
@@ -131,6 +137,7 @@ apiRouter.use(Paths.Users.Base, userRouter);
 apiRouter.use(Paths.Compras.Base, compraRouter);
 apiRouter.use(Paths.Productos.Base, productoRouter);
 apiRouter.use(Paths.Producto_has_Compra.Base, producto_has_compraRouter);
+apiRouter.use(Paths.Auth.Base, authRouter);
 
 
 // **** Export default **** //

@@ -52,3 +52,27 @@ export const Usuario = sequelize.define('Usuario', {
   timestamps: false,
   tableName: 'Usuario'
 });
+
+function newUser(
+  idUsuario: number,
+  nombre: string,
+  apellido: string,
+  email: string,
+  contrasenia: string,
+  direccion: string
+): IUser {
+  return {
+      idUsuario: (idUsuario ?? 0),
+      nombre: (nombre ?? ''),
+      apellido: (apellido ?? ''),
+      email: (email ?? ''),
+      contrasenia: (contrasenia ?? ''),
+      direccion: (direccion ?? '')
+  };
+}
+
+export default {
+  Usuario,
+  newUser
+
+};

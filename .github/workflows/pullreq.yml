@@ -25,8 +25,8 @@ jobs:
       - name: Npm Install
         run: npm install
 
-      - name:  Install Angular
-        run: npm install -g @angular/cli
+      - name:  Install Express
+        run: npm install express --save
 
       - name: Run Tests
-        run: ng test --watch=false --browsers=ChromeHeadless
+        run: npm test

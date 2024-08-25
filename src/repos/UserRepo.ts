@@ -60,6 +60,7 @@ async function add(usuario: IUser): Promise<string | void> {
       email: usuario.email,
       contrasenia: contra,
       direccion: usuario.direccion,
+      isSuperUser: usuario.isSuperUser
     });
   } catch (error) {
     console.error("Error adding usuario:", error);

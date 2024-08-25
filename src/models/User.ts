@@ -19,6 +19,7 @@ export interface IUser {
   email: string;
   direccion: string;
   contrasenia: string;
+  isSuperUser: boolean;
 }
 
 export const Usuario = sequelize.define('Usuario', {
@@ -47,6 +48,11 @@ export const Usuario = sequelize.define('Usuario', {
   direccion: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  isSuperUser: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 }, {
   timestamps: false,
@@ -59,7 +65,8 @@ function newUser(
   apellido: string,
   email: string,
   contrasenia: string,
-  direccion: string
+  direccion: string,
+  isSuperUser: boolean
 ): IUser {
   return {
       idUsuario: (idUsuario ?? 0),
@@ -67,7 +74,8 @@ function newUser(
       apellido: (apellido ?? ''),
       email: (email ?? ''),
       contrasenia: (contrasenia ?? ''),
-      direccion: (direccion ?? '')
+      direccion: (direccion ?? ''),
+      isSuperUser: (isSuperUser ?? false)
   };
 }
 

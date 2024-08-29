@@ -6,7 +6,7 @@ import ProductoRoutes from '@src/routes/ProductoRoutes';
 import UserRoutes from './UserRoutes';
 import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 import AuthRoutes from './AuthRoutes';
-
+import {authenticateToken}from '@src/middleware/validateToken';
 
 // **** Variables **** //
 
@@ -42,6 +42,7 @@ userRouter.post(
 // Update one user
 userRouter.put(
   Paths.Users.Update,
+  authenticateToken,
   UserRoutes.update,
 );
 

@@ -39,7 +39,13 @@ async function add(req: IReq<IUser>, res: IRes) {
  */
 async function update(req: IReq<IUser>, res: IRes) {
   const  user  = req.body;
-  console.log(user);
+
+  //asegurarse de que el usuario que se quiere actualizar es el mismo que el que esta logueado
+
+  const token = (req.headers['authorization'] as string).split(' ')[1];
+  const id = JSON.parse(atob(token.split('.')[1])).data;
+  user.idUsuario = id;
+   
   await UserService.updateOne(user);
   return res.status(HttpStatusCodes.OK).end();
 }

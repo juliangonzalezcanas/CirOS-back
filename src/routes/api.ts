@@ -7,6 +7,7 @@ import UserRoutes from './UserRoutes';
 import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 import AuthRoutes from './AuthRoutes';
 import {authenticateToken}from '@src/middleware/validateToken';
+import MpRoutes from './MpRoutes';
 
 // **** Variables **** //
 
@@ -21,6 +22,7 @@ const productoRouter = Router();
 const compraRouter = Router();
 const producto_has_compraRouter = Router();
 const authRouter = Router();
+const mpRouter = Router();
 
 // Get all users
 userRouter.get(
@@ -132,6 +134,12 @@ authRouter.post(
   AuthRoutes.login,
 );
 
+//MERCADO PAGO
+mpRouter.post(
+  Paths.Mp.Post,
+  MpRoutes.registrarCompra,
+);
+
 
 // Add Routers
 apiRouter.use(Paths.Users.Base, userRouter);
@@ -139,6 +147,7 @@ apiRouter.use(Paths.Compras.Base, compraRouter);
 apiRouter.use(Paths.Productos.Base, productoRouter);
 apiRouter.use(Paths.Producto_has_Compra.Base, producto_has_compraRouter);
 apiRouter.use(Paths.Auth.Base, authRouter);
+apiRouter.use(Paths.Mp.Base, mpRouter)
 
 
 // **** Export default **** //

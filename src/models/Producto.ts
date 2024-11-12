@@ -17,6 +17,7 @@ export interface IProducto {
   nombre: string;
   descripcion: string;
   precio: number;
+  stock: number;
 }
 
 export const Producto = sequelize.define('Producto', {
@@ -37,8 +38,33 @@ export const Producto = sequelize.define('Producto', {
   precio: {
     type: DataTypes.FLOAT,
     allowNull: false
+  },
+  stock: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
+
 }, {
   timestamps: false,
   tableName: 'Producto'
 });
+
+/*
+insert into producto values(1, "cPhone", "negro", 980, 10);
+insert into producto values(2, "cPhone", "blanco", 980, 10);
+insert into producto values(3, "cPhone", "azul", 980, 10);
+insert into producto values(4, "cPhone", "rojo", 980, 10);
+
+
+insert into producto values(5, "cWatch", "blanco", 980, 10);
+insert into producto values(6, "cWatch", "azul", 980, 10);
+insert into producto values(7, "cWatch", "rojo", 980, 10);
+insert into producto values(8, "cWatch", "negro", 980, 10);
+
+insert into producto values(9, "cPad", "negro", 980, 10);
+insert into producto values(10, "cPad", "blanco", 980, 10);
+insert into producto values(11, "cPad", "azul", 980, 10);
+insert into producto values(12, "cPad", "rojo", 980, 10);
+
+
+*/

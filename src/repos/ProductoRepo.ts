@@ -80,6 +80,26 @@ async function update(producto: IProducto): Promise<void> {
   }
 }
 
+async function descontarStock(id: number, quantity: number): Promise<void> {
+  const data = await Producto.findByPk(id);
+  const producto :IProducto = data.dataValues;
+  producto.stock -= quantity;
+
+  
+  try {
+
+    await Producto.update(producto, {
+      where: {
+        idProducto: producto.idProducto
+      }
+    });
+
+  } catch (error) {
+    console.error("Error updating producto:", error);
+
+  }
+}
+
 
 async function delete_(id: number): Promise<void> {
   try {
@@ -106,4 +126,5 @@ export default {
   add,
   update,
   delete: delete_,
+  descontarStock
 } as const;

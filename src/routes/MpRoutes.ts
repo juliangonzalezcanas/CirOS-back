@@ -1,5 +1,6 @@
 import MercadoPagoConfig, { Payment, Preference } from 'mercadopago';
 import { IReq, IRes } from './types/express/misc';
+import ProductoRepo from '@src/repos/ProductoRepo';
 
 
 
@@ -17,11 +18,12 @@ async function registrarCompra(req: IReq, res: IRes) {
 
   if(Array.isArray(cartItems)) {
     const arrangedItems= cartItems.map((item: any) => ({
-        id: "item",
+        id: item.id,
         title: "Ciros",
         quantity: item.quantity,
         unit_price: item.price
     }));
+
 
     let pr = await preference.create({
       body:{
@@ -35,6 +37,7 @@ async function registrarCompra(req: IReq, res: IRes) {
       },
       
     });
+
 
     const url = pr.init_point!
     return res.send({url});
@@ -56,6 +59,9 @@ async function add(id: string): Promise<void> {
 
   if(payment.status === 'approved') {
     console.log('Compra aprobada');
+    payment.additional_info?.items?.map(async (item: any) => {
+      await ProductoRepo.descontarStock(item.id, item.quantity);
+    });
   }
 }
 

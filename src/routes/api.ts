@@ -135,9 +135,14 @@ authRouter.post(
 );
 
 //MERCADO PAGO
-mpRouter.post(
+mpRouter.put(
   Paths.Mp.Post,
   MpRoutes.registrarCompra,
+);
+
+mpRouter.post(
+  Paths.Mp.Post,
+  MpRoutes.webhooks,
 );
 
 

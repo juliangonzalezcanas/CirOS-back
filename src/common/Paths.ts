@@ -39,5 +39,10 @@ export default {
     GetOne: '/:id',
     Add: '/',
     Delete: '/:id',
+  },
+  Mp: {
+    Base: '/pagos',
+    Post: '/',
   }
+
 } as const;

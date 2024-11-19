@@ -15,7 +15,9 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 export interface IProducto {
   idProducto: number;
   nombre: string;
-  descripcion: string;
+  color: string;
+  almacenamiento: number;
+  ram: number;
   precio: number;
   stock: number;
 }
@@ -31,8 +33,16 @@ export const Producto = sequelize.define('Producto', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  descripcion: {
+  color: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  almacenamiento: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  ram: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   precio: {
@@ -43,7 +53,7 @@ export const Producto = sequelize.define('Producto', {
     type: DataTypes.INTEGER,
     allowNull: false
   }
-
+ 
 }, {
   timestamps: false,
   tableName: 'Producto'

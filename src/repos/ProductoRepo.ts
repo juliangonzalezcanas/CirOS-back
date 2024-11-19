@@ -55,8 +55,12 @@ async function add(producto: IProducto): Promise<void> {
     await Producto.create({
       idProducto: producto.idProducto,
       nombre: producto.nombre,
-      descripcion: producto.descripcion,
-      precio: producto.precio
+      color: producto.color,
+      almacenamiento: producto.almacenamiento,
+      ram: producto.ram,
+      precio: producto.precio,
+      stock: producto.stock,
+      
     });
 
   } catch (error) {

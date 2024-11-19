@@ -32,7 +32,7 @@ function addOne(compra: ICompra): Promise<void> {
 /**
  * Update one user.
  */
-async function updateOne(compra: ICompra): Promise<void> {
+async function updateOne(compra: ICompra, id: number): Promise<void> {
   const persists = await CompraRepo.persists(compra.idCompra);
   if (!persists) {
     throw new RouteError(
@@ -41,7 +41,7 @@ async function updateOne(compra: ICompra): Promise<void> {
     );
   }
   // Return user
-  return CompraRepo.update(compra);
+  return CompraRepo.update(compra, id);
 }
 
 /**

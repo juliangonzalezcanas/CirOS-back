@@ -8,6 +8,7 @@ import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 import AuthRoutes from './AuthRoutes';
 import {authenticateToken}from '@src/middleware/validateToken';
 import MpRoutes from './MpRoutes';
+import { verifyToken } from '@src/middleware/validateToken';
 
 // **** Variables **** //
 
@@ -132,6 +133,11 @@ producto_has_compraRouter.delete(
 authRouter.post(
   Paths.Auth.Login,
   AuthRoutes.login,
+);
+
+authRouter.post(
+  Paths.Auth.Verify,
+  verifyToken,
 );
 
 //MERCADO PAGO

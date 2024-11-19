@@ -16,6 +16,7 @@ export default {
   Auth: {
     Base: '/auth',
     Login: '/',
+    Verify: '/verify',
   },
   Productos: {
     Base: '/producto',

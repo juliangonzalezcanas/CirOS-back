@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request as IReq, Response as IRes, NextFunction as INext } from "express";
+import HttpStatusCodes from "@src/common/HttpStatusCodes";
 
 
 export interface Payload {
@@ -24,4 +25,25 @@ export const authenticateToken = (req: IReq, res:IRes, next: INext) => {
             res.sendStatus(500); 
         }
     });
+
 }
+
+
+export  async function verifyToken(req: IReq, res: IRes) {
+    const { token } = req.body as unknown as { token: string };
+
+    try {
+        const verified = await new Promise((resolve, reject) => {
+            jwt.verify(token, process.env.TOKEN_SECRET || "prusci", (err, user) => {
+                if (err) return reject(err);
+                resolve(user);
+            });
+        });
+
+        if (verified) {
+            return res.status(HttpStatusCodes.OK).send({ message: "Token verified" });;
+        }
+    } catch (error) {
+        return res.status(HttpStatusCodes.UNAUTHORIZED).send({ error: "Unauthorized" });
+    }
+};

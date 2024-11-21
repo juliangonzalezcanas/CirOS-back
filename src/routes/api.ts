@@ -84,6 +84,8 @@ compraRouter.delete(
   CompraRoutes.delete,
 );
 
+
+
 productoRouter.get(
   Paths.Productos.Get,
   ProductoRoutes.getAll,
@@ -97,6 +99,11 @@ productoRouter.get(
 productoRouter.post(
   Paths.Productos.Add,
   ProductoRoutes.add,
+);
+
+productoRouter.put(
+  Paths.Productos.GetProductbyIdSpec,
+  ProductoRoutes.getProductBySpecs,
 );
 
 productoRouter.put(

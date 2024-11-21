@@ -22,6 +22,7 @@ export default {
     Base: '/producto',
     Get: '/',
     GetOne: '/:id',
+    GetProductbyIdSpec:'/getProductBySpecs',
     Add: '/',
     Update: '/:id',
     Delete: '/:id',

@@ -120,6 +120,33 @@ async function delete_(id: number): Promise<void> {
   }
 }
 
+// Función para obtener un producto por sus especificaciones
+export const getProductBySpecs = async (nombre: string, storage: number, color: string, ram: number): Promise<IProducto | null> => {
+ /* const query = `
+    SELECT * FROM Producto 
+    WHERE nombre = ? 
+    AND almacenamiento = ? 
+    AND color = ? 
+    AND ram = ?
+  `;
+*/
+  try {
+    const result = await Producto.findOne({
+      where: {
+        nombre: nombre,
+        almacenamiento : storage,
+        color : color,
+        ram : ram
+      }
+    });
+    const respuesta =  result.idProducto// Retorna el primer producto que coincida, si existe
+    console.log(respuesta)
+    return respuesta } catch (error) {
+    console.error('Error al obtener el producto por especificaciones:', error);
+    throw new Error('Error en la base de datos');
+  }
+};
+
 
 // **** Export default **** //
 
@@ -130,5 +157,6 @@ export default {
   add,
   update,
   delete: delete_,
-  descontarStock
+  descontarStock, 
+  getProductBySpecs
 } as const;

@@ -1,8 +1,11 @@
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
-import ProductoService from '@src/services/ProductoService';
+import ProductoService, { PRODUCTO_NOT_FOUND_ERR } from '@src/services/ProductoService';
 import { IProducto } from '@src/models/Producto';
 import { IReq, IRes } from './types/express/misc';
+import RouteError from '@src/common/RouteError';
+import ProductoRepo from '@src/repos/ProductoRepo';
+import { IAtt } from '@src/models/Attributes';
 
 
 // **** Functions **** //
@@ -19,6 +22,21 @@ async function getOne(req: IReq, res: IRes) {
   const id = +req.params.id;
   const producto = await ProductoService.getOne(id);
   return res.status(HttpStatusCodes.OK).json( producto );
+}
+
+/**
+ * Get a product by its specifications.
+ */
+async function getProductBySpecs(req: IReq<IAtt>): Promise<IProducto | null> {
+ const {nombre, storage, color, ram} = req.body;
+  const producto = await ProductoRepo.getProductBySpecs(nombre,storage, color, ram);
+  if (!producto) {
+    throw new RouteError(
+      HttpStatusCodes.NOT_FOUND,
+      PRODUCTO_NOT_FOUND_ERR
+    );
+  }
+  return producto;
 }
 
 /**
@@ -57,4 +75,5 @@ export default {
   add,
   update,
   delete: delete_,
+  getProductBySpecs
 } as const;

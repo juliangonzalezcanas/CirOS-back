@@ -24,13 +24,13 @@ import { NodeEnvs } from '@src/common/misc';
 import { defineAssociations } from '@src/models/sequalize';
 import { connect } from './database';
 
-import cors from "cors";
+
 
 
 // **** Variables **** //
 
 const app = express();
-
+const cors = require('cors');
 
 // **** Setup **** //
 

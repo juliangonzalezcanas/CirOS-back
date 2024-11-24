@@ -8,7 +8,7 @@ export const sequelize = new Sequelize('cirOS', 'root', 'root', {
 
 export async function connect() {
     try {
-      await sequelize.sync({force: true});
+      await sequelize.sync({alter: true});
       console.log('all good');
     } catch (error) {      
       console.error('Unable to sinc:', error);

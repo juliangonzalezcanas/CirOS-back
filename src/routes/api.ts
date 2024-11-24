@@ -8,6 +8,8 @@ import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 import AuthRoutes from './AuthRoutes';
 import {authenticateToken}from '@src/middleware/validateToken';
 import MpRoutes from './MpRoutes';
+import { verifyToken } from '@src/middleware/validateToken';
+import { isAdmin } from '@src/middleware/verifyUser';
 
 // **** Variables **** //
 
@@ -83,6 +85,8 @@ compraRouter.delete(
   CompraRoutes.delete,
 );
 
+
+
 productoRouter.get(
   Paths.Productos.Get,
   ProductoRoutes.getAll,
@@ -99,8 +103,15 @@ productoRouter.post(
 );
 
 productoRouter.put(
-  Paths.Productos.Update,
-  ProductoRoutes.update,
+  Paths.Productos.idBySpecs,
+  ProductoRoutes.idBySpecs,
+);
+
+productoRouter.put(
+  Paths.Productos.updateStock,
+  authenticateToken,
+  isAdmin,
+  ProductoRoutes.updateStock,
 );
 
 productoRouter.delete(
@@ -132,6 +143,11 @@ producto_has_compraRouter.delete(
 authRouter.post(
   Paths.Auth.Login,
   AuthRoutes.login,
+);
+
+authRouter.post(
+  Paths.Auth.Verify,
+  verifyToken,
 );
 
 //MERCADO PAGO

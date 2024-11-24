@@ -9,6 +9,7 @@ import AuthRoutes from './AuthRoutes';
 import {authenticateToken}from '@src/middleware/validateToken';
 import MpRoutes from './MpRoutes';
 import { verifyToken } from '@src/middleware/validateToken';
+import { isAdmin } from '@src/middleware/verifyUser';
 
 // **** Variables **** //
 
@@ -102,13 +103,15 @@ productoRouter.post(
 );
 
 productoRouter.put(
-  Paths.Productos.GetProductbyIdSpec,
-  ProductoRoutes.getProductBySpecs,
+  Paths.Productos.idBySpecs,
+  ProductoRoutes.idBySpecs,
 );
 
 productoRouter.put(
-  Paths.Productos.Update,
-  ProductoRoutes.update,
+  Paths.Productos.updateStock,
+  authenticateToken,
+  isAdmin,
+  ProductoRoutes.updateStock,
 );
 
 productoRouter.delete(

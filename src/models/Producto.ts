@@ -22,6 +22,13 @@ export interface IProducto {
   stock: number;
 }
 
+export interface IProductoSpecs {
+  nombre: string;
+  storage: number;
+  color: string;
+  ram: number;
+}
+
 export const Producto = sequelize.define('Producto', {
   idProducto: {
     type: DataTypes.INTEGER,

@@ -44,6 +44,10 @@ async function updateOne(producto: IProducto): Promise<void> {
   return ProductoRepo.update(producto);
 }
 
+async function updateStock(id: number, quantity: number): Promise<void> {
+  return ProductoRepo.updateStock(id, quantity);
+}
+
 /**
  * Delete a user by their id.
  */
@@ -67,5 +71,6 @@ export default {
   getAll,
   addOne,
   updateOne,
+  updateStock,  
   delete: _delete,
 } as const;

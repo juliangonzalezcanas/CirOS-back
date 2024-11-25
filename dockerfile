@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:latest AS builder
+FROM node:latest AS runner
 
 WORKDIR /app
 

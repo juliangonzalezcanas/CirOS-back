@@ -53,6 +53,7 @@ async function getAll(): Promise<IProducto[]> {
 async function add(producto: IProducto): Promise<void> {
   try {
     await Producto.create({
+      
       idProducto: producto.idProducto,
       nombre: producto.nombre,
       color: producto.color,

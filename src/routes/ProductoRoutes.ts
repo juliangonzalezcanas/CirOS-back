@@ -1,8 +1,11 @@
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
-import ProductoService from '@src/services/ProductoService';
-import { IProducto } from '@src/models/Producto';
+import ProductoService, { PRODUCTO_NOT_FOUND_ERR } from '@src/services/ProductoService';
+import { IProducto, IProductoSpecs } from '@src/models/Producto';
 import { IReq, IRes } from './types/express/misc';
+import ProductoRepo from '@src/repos/ProductoRepo';
+import { IAtt } from '@src/models/Attributes';
+
 
 
 // **** Functions **** //
@@ -20,6 +23,8 @@ async function getOne(req: IReq, res: IRes) {
   const producto = await ProductoService.getOne(id);
   return res.status(HttpStatusCodes.OK).json( producto );
 }
+
+
 
 /**
  * Add one user.
@@ -39,6 +44,24 @@ async function update(req: IReq<IProducto>, res: IRes) {
   return res.status(HttpStatusCodes.OK).end();
 }
 
+async function updateStock(req: IReq, res: IRes) {
+
+  const {id, quantity} = req.body as unknown as {id: number, quantity: number};
+  await ProductoService.updateStock(id, quantity);
+  return res.status(HttpStatusCodes.OK).end();
+}
+
+async function idBySpecs(req: IReq<IAtt>, res: IRes) {
+  console.log(req.body);
+  const {nombre, storage, color, ram} = req.body;
+
+
+  const producto = await ProductoRepo.getProductBySpecs(nombre, storage, color, ram);
+  
+  const id = producto?.idProducto;
+  return res.status(HttpStatusCodes.OK).send({id});
+}
+
 /**
  * Delete one user.
  */
@@ -56,5 +79,7 @@ export default {
   getOne,
   add,
   update,
+  updateStock,
+  idBySpecs,
   delete: delete_,
 } as const;

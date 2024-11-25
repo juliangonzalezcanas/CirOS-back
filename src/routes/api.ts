@@ -6,7 +6,10 @@ import ProductoRoutes from '@src/routes/ProductoRoutes';
 import UserRoutes from './UserRoutes';
 import Producto_has_ComprasRoutes  from './Producto_has_CompraRoutes';
 import AuthRoutes from './AuthRoutes';
-
+import {authenticateToken}from '@src/middleware/validateToken';
+import MpRoutes from './MpRoutes';
+import { verifyToken } from '@src/middleware/validateToken';
+import { isAdmin } from '@src/middleware/verifyUser';
 
 // **** Variables **** //
 
@@ -21,6 +24,7 @@ const productoRouter = Router();
 const compraRouter = Router();
 const producto_has_compraRouter = Router();
 const authRouter = Router();
+const mpRouter = Router();
 
 // Get all users
 userRouter.get(
@@ -42,6 +46,7 @@ userRouter.post(
 // Update one user
 userRouter.put(
   Paths.Users.Update,
+  authenticateToken,
   UserRoutes.update,
 );
 
@@ -80,6 +85,8 @@ compraRouter.delete(
   CompraRoutes.delete,
 );
 
+
+
 productoRouter.get(
   Paths.Productos.Get,
   ProductoRoutes.getAll,
@@ -96,8 +103,15 @@ productoRouter.post(
 );
 
 productoRouter.put(
-  Paths.Productos.Update,
-  ProductoRoutes.update,
+  Paths.Productos.idBySpecs,
+  ProductoRoutes.idBySpecs,
+);
+
+productoRouter.put(
+  Paths.Productos.updateStock,
+  authenticateToken,
+  isAdmin,
+  ProductoRoutes.updateStock,
 );
 
 productoRouter.delete(
@@ -131,6 +145,22 @@ authRouter.post(
   AuthRoutes.login,
 );
 
+authRouter.post(
+  Paths.Auth.Verify,
+  verifyToken,
+);
+
+//MERCADO PAGO
+mpRouter.put(
+  Paths.Mp.Post,
+  MpRoutes.registrarCompra,
+);
+
+mpRouter.post(
+  Paths.Mp.Post,
+  MpRoutes.webhooks,
+);
+
 
 // Add Routers
 apiRouter.use(Paths.Users.Base, userRouter);
@@ -138,6 +168,7 @@ apiRouter.use(Paths.Compras.Base, compraRouter);
 apiRouter.use(Paths.Productos.Base, productoRouter);
 apiRouter.use(Paths.Producto_has_Compra.Base, producto_has_compraRouter);
 apiRouter.use(Paths.Auth.Base, authRouter);
+apiRouter.use(Paths.Mp.Base, mpRouter)
 
 
 // **** Export default **** //

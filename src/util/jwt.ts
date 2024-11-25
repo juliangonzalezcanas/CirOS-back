@@ -12,3 +12,4 @@ export function generateToken(data: any): Promise<string>{
         });
     });
 }
+

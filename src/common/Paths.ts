@@ -16,11 +16,14 @@ export default {
   Auth: {
     Base: '/auth',
     Login: '/',
+    Verify: '/verify',
   },
   Productos: {
     Base: '/producto',
     Get: '/',
     GetOne: '/:id',
+    idBySpecs: '/idBySpecs',
+    updateStock:'/updateStock',
     Add: '/',
     Update: '/:id',
     Delete: '/:id',
@@ -39,5 +42,10 @@ export default {
     GetOne: '/:id',
     Add: '/',
     Delete: '/:id',
+  },
+  Mp: {
+    Base: '/pagos',
+    Post: '/',
   }
+
 } as const;

@@ -35,7 +35,6 @@ async function add(req: IReq<ICompra>, res: IRes) {
  */
 async function update(req: IReq<ICompra>, res: IRes) {
   const compra = req.body;
-  await CompraService.updateOne(compra);
   return res.status(HttpStatusCodes.OK).end();
 }
 

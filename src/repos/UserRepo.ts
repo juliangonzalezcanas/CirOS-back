@@ -60,6 +60,7 @@ async function add(usuario: IUser): Promise<string | void> {
       email: usuario.email,
       contrasenia: contra,
       direccion: usuario.direccion,
+      isSuperUser: usuario.isSuperUser
     });
   } catch (error) {
     console.error("Error adding usuario:", error);
@@ -69,7 +70,7 @@ async function add(usuario: IUser): Promise<string | void> {
 
 async function update(usuario: IUser): Promise<void> {
   try {
-
+    usuario.contrasenia = await bcrypt.hash(usuario.contrasenia, 10);
     await Usuario.update(usuario, {
       where: {
         idUsuario: usuario.idUsuario

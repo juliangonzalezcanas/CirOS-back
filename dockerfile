@@ -8,8 +8,18 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "run", "build"]
+FROM node:latest AS builder
+
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+
+COPY ./package*.json ./
+
+RUN npm install --only=production
+
+EXPOSE 3000
 
 CMD ["npm", "start"]

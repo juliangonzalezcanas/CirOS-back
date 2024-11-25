@@ -9,6 +9,7 @@ export interface ICompra {
   fecha: Date;
   status: string;
   Usuario_idUsuario: number;
+  total: number;
 }
 
 export const Compra = sequelize.define('Compra', {
@@ -32,7 +33,11 @@ export const Compra = sequelize.define('Compra', {
             model: Usuario,
             key: 'idUsuario'
         }
-    } 
+    } ,
+    total: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    }
 }, {
   timestamps: false,
   tableName: 'Compra'

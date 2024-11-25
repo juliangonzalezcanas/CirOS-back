@@ -3,6 +3,8 @@ import { IReq, IRes } from './types/express/misc';
 import ProductoRepo from '@src/repos/ProductoRepo';
 import CompraRepo from '@src/repos/CompraRepo';
 import { ICompra } from '@src/models/Compra';
+import Producto_has_CompraRepo from '@src/repos/Producto_has_CompraRepo';
+import { IProducto_has_Compra } from '@src/models/Producto_has_Compra';
 
 
 
@@ -18,7 +20,7 @@ async function registrarCompra(req: IReq, res: IRes) {
   const body = req.body as unknown as {items: [], id: number};
   const cartItems = body.items;
   const id = body.id;
-
+  var total: number = 0;
 
   const preference = new Preference(client)
 
@@ -27,9 +29,10 @@ async function registrarCompra(req: IReq, res: IRes) {
         id: item.id,
         title: "Ciros",
         quantity: item.quantity,
-        unit_price: item.price
+        unit_price: item.price,
     }));
 
+    const total = arrangedItems.reduce((acc, item) => acc + item.unit_price * item.quantity, 0);
 
     let pr = await preference.create({
       body:{
@@ -41,7 +44,8 @@ async function registrarCompra(req: IReq, res: IRes) {
         },
         auto_return: 'all',
         metadata: {
-          userId: id
+          userId: id,
+          total: total
         },
       },
       
@@ -49,7 +53,7 @@ async function registrarCompra(req: IReq, res: IRes) {
 
 
     
-    await CompraRepo.add({idCompra: (pr.collector_id)!, fecha: new Date(pr.date_created as string), Usuario_idUsuario: pr.metadata.userId} as ICompra);
+    await CompraRepo.add({idCompra: (pr.collector_id)!, fecha: new Date(pr.date_created as string), Usuario_idUsuario: pr.metadata.userId, total: pr.metadata.total} as ICompra);
 
     const url = pr.init_point!
     return res.send({url});
@@ -76,6 +80,9 @@ async function add(id: string): Promise<void> {
       await CompraRepo.update({idCompra: payment.id as number, fecha: new Date(payment.date_created as string), status: payment.status, Usuario_idUsuario: payment.metadata.userId} as ICompra, (payment.collector_id as number));
       payment.additional_info?.items?.map(async (item: any) => {
         await ProductoRepo.descontarStock(item.id, item.quantity);
+        console.log(item);
+        const producto_has_compra: IProducto_has_Compra = {Compra_idCompra: payment.id as number, Producto_idProducto: item.id, cantidad: item.quantity, precio: item.unit_price as number};
+        await Producto_has_CompraRepo.add(producto_has_compra);
       });
     }
   }

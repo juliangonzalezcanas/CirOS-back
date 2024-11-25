@@ -53,10 +53,15 @@ async function getAll(): Promise<IProducto[]> {
 async function add(producto: IProducto): Promise<void> {
   try {
     await Producto.create({
+      
       idProducto: producto.idProducto,
       nombre: producto.nombre,
-      descripcion: producto.descripcion,
-      precio: producto.precio
+      color: producto.color,
+      almacenamiento: producto.almacenamiento,
+      ram: producto.ram,
+      precio: producto.precio,
+      stock: producto.stock,
+      
     });
 
   } catch (error) {
@@ -68,6 +73,45 @@ async function add(producto: IProducto): Promise<void> {
 async function update(producto: IProducto): Promise<void> {
   try {
 
+    await Producto.update(producto, {
+      where: {
+        idProducto: producto.idProducto
+      }
+    });
+
+  } catch (error) {
+    console.error("Error updating producto:", error);
+
+  }
+}
+
+async function descontarStock(id: number, quantity: number): Promise<void> {
+  const data = await Producto.findByPk(id);
+  const producto :IProducto = data.dataValues;
+  producto.stock -= quantity;
+
+  
+  try {
+
+    await Producto.update(producto, {
+      where: {
+        idProducto: producto.idProducto
+      }
+    });
+
+  } catch (error) {
+    console.error("Error updating producto:", error);
+
+  }
+}
+
+async function updateStock(id: number, quantity: number): Promise<void> {
+  const data = await Producto.findByPk(id);
+  const producto :IProducto = data.dataValues;
+
+  producto.stock += quantity;
+
+  try {
     await Producto.update(producto, {
       where: {
         idProducto: producto.idProducto
@@ -96,6 +140,27 @@ async function delete_(id: number): Promise<void> {
   }
 }
 
+// Función para obtener un producto por sus especificaciones
+async function getProductBySpecs(nombre: string, storage: number, color: string, ram: number): Promise<IProducto | null> {
+  
+  try {
+    const result = await Producto.findOne({
+      where: {
+        nombre: nombre,
+        almacenamiento : storage,
+        color : color,
+        ram : ram
+      }
+    });
+    
+    return result;
+  } 
+  catch (error) {
+    console.error('Error al obtener el producto por especificaciones:', error);
+    throw new Error('Error en la base de datos');
+  }
+};
+
 
 // **** Export default **** //
 
@@ -106,4 +171,7 @@ export default {
   add,
   update,
   delete: delete_,
+  descontarStock,
+  updateStock, 
+  getProductBySpecs
 } as const;

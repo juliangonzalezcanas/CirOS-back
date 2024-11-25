@@ -64,12 +64,12 @@ async function add(compra: ICompra): Promise<void> {
   }
 }
 
-async function update(compra: ICompra): Promise<void> {
+async function update(compra: ICompra, id: number): Promise<void> {
   try {
 
     await Compra.update(compra, {
       where: {
-        idCompra: compra.idCompra
+        idCompra: id
       }
     });
 

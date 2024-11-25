@@ -38,14 +38,6 @@ function addOne(user: IUser): Promise<string | void> {
  * Update one user.
  */
 async function updateOne(user: IUser): Promise<void> {
-  const persists = await UserRepo.persists(user.idUsuario);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
-    );
-  }
-  // Return user
   return UserRepo.update(user);
 }
 

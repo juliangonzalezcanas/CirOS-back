@@ -7,19 +7,23 @@ import { Usuario } from './User';
 export interface ICompra {
   idCompra: number;
   fecha: Date;
+  status: string;
   Usuario_idUsuario: number;
 }
 
 export const Compra = sequelize.define('Compra', {
     idCompra: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
         allowNull: true,
-        autoIncrement: true
     },
     fecha: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: true
     },
     Usuario_idUsuario: {
         type: DataTypes.INTEGER,

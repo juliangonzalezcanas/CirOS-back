@@ -16,6 +16,8 @@ FROM node:latest AS runner
 
 WORKDIR /app
 
+COPY --from=builder /app/env/production.env ./env/production.env
+
 COPY --from=builder /app/dist ./dist
 
 COPY ./package*.json ./

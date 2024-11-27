@@ -29,7 +29,7 @@ const mpRouter = Router();
 // Get all users
 userRouter.get(
   Paths.Users.Get,
-  authenticateToken,
+
   UserRoutes.getAll,
 );
 
@@ -55,35 +55,41 @@ userRouter.put(
 // Delete one user
 userRouter.delete(
   Paths.Users.Delete,
+  authenticateToken,
   UserRoutes.delete,
 );
 
 // Get all users
 compraRouter.get(
   Paths.Compras.Get,
+  authenticateToken,
   CompraRoutes.getAll,
 );
 
 compraRouter.get(
   Paths.Compras.GetOne,
+  authenticateToken,
   CompraRoutes.getOne,
 );
 
 // Add one user
 compraRouter.post(
   Paths.Compras.Add,
+  authenticateToken,
   CompraRoutes.add,
 );
 
 // Update one user
 compraRouter.put(
   Paths.Compras.Update,
+  authenticateToken,
   CompraRoutes.update,
 );
 
 // Delete one user
 compraRouter.delete(
   Paths.Compras.Delete,
+  authenticateToken,
   CompraRoutes.delete,
 );
 
@@ -91,21 +97,25 @@ compraRouter.delete(
 
 productoRouter.get(
   Paths.Productos.Get,
+  authenticateToken,
   ProductoRoutes.getAll,
 );
 
 productoRouter.get(
   Paths.Productos.GetOne,
+  authenticateToken,
   ProductoRoutes.getOne,
 );
 
 productoRouter.post(
   Paths.Productos.Add,
+  authenticateToken,
   ProductoRoutes.add,
 );
 
 productoRouter.put(
   Paths.Productos.idBySpecs,
+  authenticateToken,
   ProductoRoutes.idBySpecs,
 );
 
@@ -118,27 +128,32 @@ productoRouter.put(
 
 productoRouter.delete(
   Paths.Productos.Delete,
+  authenticateToken,
   ProductoRoutes.delete,
 );
 
 producto_has_compraRouter.get(
   Paths.Producto_has_Compra.Get,
+  authenticateToken,
   Producto_has_ComprasRoutes.getAll,
 );
 
 producto_has_compraRouter.get(
   Paths.Producto_has_Compra.GetOne,
+  authenticateToken,
   Producto_has_ComprasRoutes.getOne,
 );
 
 producto_has_compraRouter.post(
   Paths.Producto_has_Compra.Add,
+  authenticateToken,
   Producto_has_ComprasRoutes.add,
 );
 
 
 producto_has_compraRouter.delete(
   Paths.Producto_has_Compra.Delete,
+  authenticateToken,
   Producto_has_ComprasRoutes.delete,
 );
 
@@ -155,6 +170,7 @@ authRouter.post(
 //MERCADO PAGO
 mpRouter.put(
   Paths.Mp.Post,
+  authenticateToken,
   MpRoutes.registrarCompra,
 );
 

@@ -1,7 +1,7 @@
 
 const { Sequelize } = require('sequelize');
 
-export const sequelize = new Sequelize('cirOS', process.env.DB_USER || 'root',  process.env.PASS || 'ciro3009', {
+export const sequelize = new Sequelize('cirOS', process.env.DB_USER || 'root',  process.env.PASS || 'root', {
     host: 'localhost',
     dialect: 'mysql',
 });

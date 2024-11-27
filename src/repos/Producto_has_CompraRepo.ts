@@ -57,7 +57,8 @@ async function add(producto_has_compra: IProducto_has_Compra): Promise<void> {
     await Producto_has_Compra.create({
       Compra_idCompra: producto_has_compra.Compra_idCompra,
       Producto_idProducto: producto_has_compra.Producto_idProducto,
-      cantidad: producto_has_compra.cantidad
+      cantidad: producto_has_compra.cantidad,
+      precio: producto_has_compra.precio
     });
 
   } catch (error) {

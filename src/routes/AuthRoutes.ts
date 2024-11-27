@@ -4,11 +4,13 @@ import AuthService from '@src/services/AuthService';
 
 async function login(IReq : IReq<{email: string, contrasenia:string}>, IRes : IRes) {
     const { email, contrasenia } = IReq.body;
+    
     try {
         const token = await AuthService.login(email, contrasenia);
         return IRes.status(HttpStatusCodes.OK).send({ token });
     }
     catch (error) {
+        console.error('Error logging in:', error);
         return IRes.status(HttpStatusCodes.UNAUTHORIZED).end();
     }
 }

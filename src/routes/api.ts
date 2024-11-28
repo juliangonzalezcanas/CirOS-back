@@ -29,7 +29,7 @@ const mpRouter = Router();
 // Get all users
 userRouter.get(
   Paths.Users.Get,
-
+  authenticateToken,
   UserRoutes.getAll,
 );
 

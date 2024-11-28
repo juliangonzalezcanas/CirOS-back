@@ -9,6 +9,10 @@ export interface Payload {
 export interface CustomRequest extends IReq {
     payload: Payload;
 }
+/* {
+    authorization: 'Bearer todoeltoken'
+} */
+
 
 export const authenticateToken = (req: IReq, res:IRes, next: INext) => {
     const authHeader = req.headers['authorization'];

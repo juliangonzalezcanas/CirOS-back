@@ -38,7 +38,7 @@ async function registrarCompra(req: IReq, res: IRes) {
       body:{
         items: arrangedItems,
         back_urls: {
-          success: 'https://cjdfc5r5-4200.brs.devtunnels.ms/',
+          success: 'https://ng2fn4q4-4200.brs.devtunnels.ms/',
           failure: 'http://localhost:3000/failure',
           pending: 'http://localhost:3000/pending'
         },

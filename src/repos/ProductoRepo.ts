@@ -90,7 +90,6 @@ async function descontarStock(id: number, quantity: number): Promise<void> {
   const producto :IProducto = data.dataValues;
   producto.stock -= quantity;
 
-  
   try {
 
     await Producto.update(producto, {

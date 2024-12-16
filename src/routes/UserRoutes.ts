@@ -27,6 +27,15 @@ async function getOne(req: IReq, res: IRes) {
 async function add(req: IReq<IUser>, res: IRes) {
   const  user  = req.body;
   try {
+    
+    const usuarios = await UserService.getAll();
+    const usuarioExistente = usuarios.find((usuario) => usuario.email === user.email);
+
+    if (usuarioExistente) {
+      
+      return res.status(400).json({ message: 'El correo electrónico ya está registrado.' });
+    }
+    
     await UserService.addOne(user);
     return res.status(HttpStatusCodes.CREATED).end();
   } catch (error) {
@@ -39,7 +48,6 @@ async function add(req: IReq<IUser>, res: IRes) {
  */
 async function update(req: IReq<IUser>, res: IRes) {
   const  user  = req.body;
-
   //asegurarse de que el usuario que se quiere actualizar es el mismo que el que esta logueado
 
   const token = (req.headers['authorization'] as string).split(' ')[1];
